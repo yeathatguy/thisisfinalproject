@@ -33,28 +33,28 @@ export default function GetQuotePage() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (isSubmitting) return // Prevent multiple submissions
-
-    setIsSubmitting(true)
-    setLoading(true)
-
-    const url = process.env.NEXT_PUBLIC_API_URL || "https://fallback-url.com";
-
- // Replace with your deployed Apps Script URL
-
-    const formDataObj = new FormData()
+    e.preventDefault();
+  
+    if (isSubmitting) return; // Prevent multiple submissions
+  
+    setIsSubmitting(true);
+    setLoading(true);
+  
+    const url = process.env.NEXT_PUBLIC_API_URL || "https://fallback-url.com"; // Replace with your Apps Script URL
+  
+    const formDataObj = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      formDataObj.append(key, value)
-    })
-
+      formDataObj.append(key, value);
+    });
+  
+    formDataObj.append("formType", "quote"); // <-- Add this line to identify it as a Quote form
+  
     try {
-      const response = await fetch(url, { method: "POST", body: formDataObj })
-      const result = await response.text()
-
+      const response = await fetch(url, { method: "POST", body: formDataObj });
+      const result = await response.text();
+  
       if (result === "Success") {
-        alert("Quote request submitted successfully!")
+        alert("Quote request submitted successfully!");
         setFormData({
           name: "",
           email: "",
@@ -64,18 +64,19 @@ export default function GetQuotePage() {
           weight: "",
           itemCategory: "",
           additionalInfo: "",
-        })
+        });
       } else {
-        alert("Error submitting form. Please try again.")
+        alert("Error submitting form. Please try again.");
       }
     } catch (error) {
-      console.error("Error:", error)
-      alert("Submission failed.")
+      console.error("Error:", error);
+      alert("Submission failed.");
     } finally {
-      setLoading(false) // Hide the spinner once done
-      setIsSubmitting(false) // Re-enable the button
+      setLoading(false);
+      setIsSubmitting(false);
     }
-  }
+  };
+  
 
   return (
     <div className="min-h-screen bg-white">

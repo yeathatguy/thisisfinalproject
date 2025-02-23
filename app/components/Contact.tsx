@@ -1,12 +1,66 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin } from "lucide-react"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, Phone, MapPin, Loader } from "lucide-react";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSubmitting) return; // Prevent duplicate submissions
+
+    setIsSubmitting(true);
+
+    const url = process.env.NEXT_PUBLIC_API_URL || "https://fallback-url.com"; // Replace with Apps Script URL
+
+    const formDataObj = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataObj.append(key, value);
+    });
+    formDataObj.append("formType", "contact"); // Important: Identify this as a Contact Us form
+
+    try {
+      const response = await fetch(url, { method: "POST", body: formDataObj });
+      const result = await response.text();
+
+      if (result === "Success") {
+        alert("Message sent successfully!");
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert("Error submitting form. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Submission failed.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="relative py-24 bg-white overflow-hidden" id="contact">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white" />
@@ -30,17 +84,17 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="bg-white rounded-2xl shadow-xl p-8 max-">
-              <form className="space-y-6">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-4">
-                  <Input placeholder="First Name" className="bg-gray-50" />
-                  <Input placeholder="Last Name" className="bg-gray-50" />
+                  <Input name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required className="bg-gray-50" />
+                  <Input name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required className="bg-gray-50" />
                 </div>
-                <Input type="email" placeholder="Email Address" className="bg-gray-50" />
-                <Input placeholder="Subject" className="bg-gray-50" />
-                <Textarea placeholder="Your Message" className="h-32 bg-gray-50" />
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                  Send Message
+                <Input name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className="bg-gray-50" />
+                <Input name="subject" placeholder="Subject" value={formData.subject} onChange={handleChange} required className="bg-gray-50" />
+                <Textarea name="message" placeholder="Your Message" value={formData.message} onChange={handleChange} required className="h-32 bg-gray-50" />
+                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={isSubmitting}>
+                  {isSubmitting ? <Loader className="animate-spin h-5 w-5 text-white" /> : "Send Message"}
                 </Button>
               </form>
             </div>
@@ -54,11 +108,7 @@ export default function Contact() {
             className="space-y-8"
           >
             <div className="flex items-start space-x-4">
-              <div className="flex-shrink-0">
-                <div className="p-4 bg-blue-100 rounded-full">
-                  <Mail className="w-6 h-6 text-blue-600" />
-                </div>
-              </div>
+              <div className="p-4 bg-blue-100 rounded-full"><Mail className="w-6 h-6 text-blue-600" /></div>
               <div>
                 <h3 className="text-lg font-semibold mb-1">Email Us</h3>
                 <p className="text-gray-600">safeshippinglogistics54@gmail.com</p>
@@ -67,11 +117,7 @@ export default function Contact() {
             </div>
 
             <div className="flex items-start space-x-4">
-              <div className="flex-shrink-0">
-                <div className="p-4 bg-blue-100 rounded-full">
-                  <Phone className="w-6 h-6 text-blue-600" />
-                </div>
-              </div>
+              <div className="p-4 bg-blue-100 rounded-full"><Phone className="w-6 h-6 text-blue-600" /></div>
               <div>
                 <h3 className="text-lg font-semibold mb-1">Call Us</h3>
                 <p className="text-gray-600">+91 80008-00046</p>
@@ -80,26 +126,15 @@ export default function Contact() {
             </div>
 
             <div className="flex items-start space-x-4">
-              <div className="flex-shrink-0">
-                <div className="p-4 bg-blue-100 rounded-full">
-                  <MapPin className="w-6 h-6 text-blue-600" />
-                </div>
-              </div>
+              <div className="p-4 bg-blue-100 rounded-full"><MapPin className="w-6 h-6 text-blue-600" /></div>
               <div>
                 <h3 className="text-lg font-semibold mb-1">Visit Us</h3>
-                <p className="text-gray-600">
-                  A2/105 Paschim Vihar,
-                  <br />
-                  New Delhi - 110063,
-                  <br />
-                  India.
-                </p>
+                <p className="text-gray-600">A2/105 Paschim Vihar, New Delhi - 110063, India.</p>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-
