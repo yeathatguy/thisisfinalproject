@@ -28,7 +28,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-64 md:h-full">
               <Image
-                src="/placeholder.svg"
+                src="/aboutpictureplane.webp"
                 alt="Safe Ship Logistics Journey"
                 layout="fill"
                 objectFit="cover"
