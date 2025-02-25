@@ -77,7 +77,6 @@ export default function GetQuotePage() {
     }
   };
   
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -103,13 +102,15 @@ export default function GetQuotePage() {
             onChange={handleChange}
             required
           />
-          <Input
-            name="pickupPoint"
-            placeholder="Pickup Point (City, China)"
-            value={formData.pickupPoint}
-            onChange={handleChange}
-            required
-          />
+          <Select onValueChange={(value) => handleSelectChange("pickupPoint", value)} required>
+            <SelectTrigger>
+              <SelectValue placeholder="Select Dropoff Point" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="yiwu">Yiwu</SelectItem>
+              <SelectItem value="guangzhou">Guangzhou</SelectItem>
+            </SelectContent>
+          </Select>
           <Input
             name="deliveryPoint"
             placeholder="Delivery Point (City, India)"
@@ -134,7 +135,11 @@ export default function GetQuotePage() {
                 <SelectItem value="electronics">Electronics</SelectItem>
                 <SelectItem value="clothing">Clothing</SelectItem>
                 <SelectItem value="machinery">Machinery</SelectItem>
-                <SelectItem value="chemicals">Chemicals</SelectItem>
+                <SelectItem value="autoparts">Autoparts</SelectItem>
+                <SelectItem value="homedecor">Home Decor</SelectItem>
+                <SelectItem value="jewellery">Artificial Jewellery</SelectItem>
+                <SelectItem value="stationary">Stationary Items</SelectItem>
+                <SelectItem value="toys">Toys</SelectItem>
                 <SelectItem value="other">Other</SelectItem>
               </SelectContent>
             </Select>
