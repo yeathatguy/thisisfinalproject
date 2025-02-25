@@ -23,10 +23,12 @@ export default function Header() {
       <div className="container flex h-16 items-center mx-auto justify-between px-4 lg:px-10">
         
         {/* Logo */}
-        <div className="flex items-center space-x-2">
-          <Ship className="h-8 w-8 text-blue-600" />
-          <span className="text-xl font-bold text-blue-600">Safe Ship Logistics</span>
-        </div>
+        <Link href="/">
+          <div className="flex items-center space-x-2">
+            <Ship className="h-8 w-8 text-blue-600" />
+            <span className="text-xl font-bold text-blue-600">Safe Ship Logistics</span>
+          </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
