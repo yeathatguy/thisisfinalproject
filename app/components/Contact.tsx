@@ -112,7 +112,7 @@ export default function Contact() {
               <div>
                 <h3 className="text-lg font-semibold mb-1">Email Us</h3>
                 <p className="text-gray-600">safeshippinglogistics54@gmail.com</p>
-                <p className="text-gray-600">support@safeshiplogistics.com</p>
+                
               </div>
             </div>
 
