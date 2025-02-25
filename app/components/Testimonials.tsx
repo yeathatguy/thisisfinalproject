@@ -3,11 +3,11 @@ import { Card, CardContent } from "@/components/ui/card"
 const testimonials = [
   {
     text: "Safe Ship Logistics provided exceptional service and delivered our shipment on time and without any issues. Highly recommended!",
-    author: "Vivek Sharma, Owner, K-dropshipping",
+    author: "Lokendra Singh, Owner, AIT-dropshipping",
   },
   {
     text: "I was impressed with the professionalism and responsiveness of the Safe Ship Logistics team. They handled my complex shipment with ease.",
-    author: "Anshul Singh, Logistics Manager",
+    author: "Anshul Sharma, Logistics Manager",
   },
   {
     text: "Safe Ship Logistics is my go-to shipping partner. Their global network and reliable service make them a valuable asset to my business.",
