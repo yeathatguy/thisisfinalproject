@@ -45,21 +45,21 @@ export default function GetQuotePage() {
   
     const formDataObj = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
+      console.log(`Appending ${key}:`, value);
       formDataObj.append(key, value);
     });
 
-    console.log("Submitting form data:", formData);
+    
 
   
     formDataObj.append("formType", "quote"); // <-- Add this line to identify it as a Quote form
-    console.log("Submitting form data:", formData);
-
+    
     try {
       const response = await fetch(url, { method: "POST", body: formDataObj });
       const result = await response.text();
   
       if (result === "Success") {
-        console.log("Submitting form data:", formData);
+        
 
         alert("Quote request submitted successfully!");
         setFormData({
