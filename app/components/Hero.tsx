@@ -63,9 +63,11 @@ export default function Hero() {
               Seamless logistics for importing from China to India. We handle everything from sourcing to delivery.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
-                Book Now
-              </Button>
+              <Link href="/get-quote">
+                <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
+                  Book Now
+                </Button>
+              </Link>
             </div>
           </motion.div>
 
