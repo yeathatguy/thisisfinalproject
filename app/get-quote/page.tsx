@@ -45,7 +45,7 @@ export default function GetQuotePage() {
   
     const formDataObj = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      console.log(`Appending ${key}:`, value);
+      
       formDataObj.append(key, value);
     });
 
