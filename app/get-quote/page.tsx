@@ -157,7 +157,7 @@ export default function GetQuotePage() {
                 <SelectItem value="jewellery">Artificial Jewellery</SelectItem>
                 <SelectItem value="stationary">Stationary Items</SelectItem>
                 <SelectItem value="toys">Toys</SelectItem>
-                <SelectItem value="toys">Shoes</SelectItem>
+                <SelectItem value="shoes">Shoes</SelectItem>
                 <SelectItem value="other">Other</SelectItem>
               </SelectContent>
             </Select>
