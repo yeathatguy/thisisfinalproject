@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Ship, MapPin } from "lucide-react"
-
+import Link from "next/link"
 export default function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-600">
@@ -63,11 +63,11 @@ export default function Hero() {
               Seamless logistics for importing from China to India. We handle everything from sourcing to delivery.
             </p>
             <div className="flex flex-wrap gap-4">
-              
+              <Link href="/get-quote">
                 <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
-                  <Link href="/get-quote">Book Now</Link>
+                  Book Now
                 </Button>
-              
+              </Link>
             </div>
           </motion.div>
 
