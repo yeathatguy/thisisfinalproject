@@ -15,6 +15,7 @@ export default function GetQuotePage() {
     email: "",
     phone: "",
     pickupPoint: "",
+    cpm: "",
     deliveryPoint: "",
     weight: "",
     itemCategory: "",
@@ -60,6 +61,7 @@ export default function GetQuotePage() {
           email: "",
           phone: "",
           pickupPoint: "",
+          cpm: "",
           deliveryPoint: "",
           weight: "",
           itemCategory: "",
@@ -102,15 +104,24 @@ export default function GetQuotePage() {
             onChange={handleChange}
             required
           />
-          <Select onValueChange={(value) => handleSelectChange("pickupPoint", value)} required>
-            <SelectTrigger>
-              <SelectValue placeholder="Select Dropoff Point" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="yiwu">Yiwu</SelectItem>
-              <SelectItem value="guangzhou">Guangzhou</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Select onValueChange={(value) => handleSelectChange("pickupPoint", value)} required>
+              <SelectTrigger>
+                <SelectValue placeholder="Select Dropoff Point" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="yiwu">Yiwu</SelectItem>
+                <SelectItem value="guangzhou">Guangzhou</SelectItem>
+              </SelectContent>
+            </Select>
+            <Input
+            name="cpm"
+            placeholder="CPM"
+            value={formData.cpm}
+            onChange={handleChange}
+            required
+            />
+          </div>
           <Input
             name="deliveryPoint"
             placeholder="Delivery Point (City, India)"
@@ -140,6 +151,7 @@ export default function GetQuotePage() {
                 <SelectItem value="jewellery">Artificial Jewellery</SelectItem>
                 <SelectItem value="stationary">Stationary Items</SelectItem>
                 <SelectItem value="toys">Toys</SelectItem>
+                <SelectItem value="toys">Shoes</SelectItem>
                 <SelectItem value="other">Other</SelectItem>
               </SelectContent>
             </Select>
