@@ -122,7 +122,7 @@ export default function GetQuotePage() {
             </Select>
             <Input
             name="cpm"
-            placeholder="CPM"
+            placeholder="CBM"
             value={formData.cpm}
             onChange={handleChange}
             required
